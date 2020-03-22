@@ -1,24 +1,15 @@
-# cl4-start
-
-## Project setup
-```
+## project setup 
 yarn install
-```
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+## dev
+yarn dev
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## release
+yarn run build:release
 
-### Lints and fixes files
-```
-yarn lint
-```
+yarn run release
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## production
+yarn run build:prd
+
+yarn run prd
