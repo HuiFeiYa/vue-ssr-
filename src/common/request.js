@@ -1,12 +1,6 @@
 import axios from 'axios'
-const baseUrlMap = {
-  development: 'https://test.wxb.com.cn/gateway/',
-  release: 'https://test.wxb.com.cn/gateway/'
-}
-// eslint-disable-next-line no-undef
-const env = process.env.NODE_ENV
 const service = axios.create({
-  baseURL: baseUrlMap[env]
+  baseURL: 'https://test.wxb.com.cn/gateway/'
 })
 service.interceptors.response.use(
   resopnse => {

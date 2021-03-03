@@ -1,6 +1,8 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <div>{{ article.title }}</div>
+    <span>{{ count }}</span>
+    <button @click="count++">+</button>
   </div>
 </template>
 
@@ -12,6 +14,16 @@ export default {
   },
   asyncData({ store,context }){
     return context && store.dispatch('getNormal',context)
+  },
+  computed:{
+    article() {
+      return this.$store.state.normalContent
+    }
+  },
+  data() {
+    return {
+      count:0
+    }
   }
 }
 </script>
