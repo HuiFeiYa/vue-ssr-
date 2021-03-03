@@ -1,37 +1,10 @@
 import { createApp } from './main'
-const { app, router, store } = createApp()
+
+const { app, store } = createApp()
 
 if (window.__INITIAL_STATE__) {
+  // We initialize the store state with the data injected from the server
   store.replaceState(window.__INITIAL_STATE__)
 }
 
-router.onReady(() => {
-  router.beforeResolve((to, from, next) => {
-    const matched = router.getMatchedComponents(to)
-    const prevMatched = router.getMatchedComponents(from)
-    let diffed = false
-    const activated = matched.filter((c, i) => {
-      return diffed || (diffed = prevMatched[i] !== c)
-    })
-
-    if (!activated.length) {
-      return next()
-    }
-
-    Promise.all(
-      activated.map(component => {
-        if (component.asyncData) {
-          component.asyncData({
-            store,
-            route: to
-          })
-        }
-      })
-    )
-      .then(() => {
-        next()
-      })
-      .catch(next)
-  })
-  app.$mount('#app')
-})
+app.$mount('#app')
