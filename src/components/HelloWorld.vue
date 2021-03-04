@@ -12,7 +12,8 @@ export default {
   props: {
     msg: String
   },
-  asyncData({ store,context }){
+  serverPrefetch({ store,context }){
+    console.log('执行prefetch',store,this.$store.state)
     return context && store.dispatch('getNormal',context)
   },
   computed:{
