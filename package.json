@@ -11,8 +11,9 @@
     "release": "cross-env NODE_ENV=release npm run setup",
     "start": "cross-env NODE_ENV=production npm run setup",
     "dev:serve": "cross-env NODE_ENV=development WEBPACK_TARGET=node npm run setup",
-    "dev": "concurrently \"npm run serve\" \"npm run dev:serve\" ",
-    "fix": "vue-cli-service lint --fix"
+    "dev": "npm run dev:serve & npm run serve ",
+    "fix": "vue-cli-service lint --fix",
+    "stop": "pm2 delete all"
   },
   "dependencies": {
     "axios": "^0.19.2",

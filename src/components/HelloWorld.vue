@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    4
     <div>{{ article.title }}</div>
     <span>{{ count }}</span>
     <button @click="count++">+</button>
@@ -13,7 +14,6 @@ export default {
     msg: String
   },
   serverPrefetch({ store,context }){
-    console.log('执行prefetch',store,this.$store.state)
     return context && store.dispatch('getNormal',context)
   },
   computed:{

@@ -6,16 +6,17 @@ const TARGET_NODE = process.env.WEBPACK_TARGET === 'node'
 const target = TARGET_NODE ? 'server' : 'client'
 const path = require('path')
 const webpack = require('webpack')
-const resolve = file => path.resolve(__dirname, file)
+const resolve = file => path.resolve(__dirname,file)
 const isDev = process.env.NODE_ENV === 'development'
 module.exports = {
   // baseUrl Deprecated since Vue CLI 3.3, please use publicPath instead
   // 如果配置的是二级域名需要将二级域名和 publicPath 保持一致
   // 本地环境从 http://127.0.0.1:8080 服务下的内存文件中获取
-  publicPath: isDev ? 'http://localhost:8080/' : '/dist',
+  publicPath: isDev ? 'http://localhost:9090/' : '/dist',
   devServer: {
     historyApiFallback: true,
-    headers: { 'Access-Control-Allow-Origin': '*' }
+    headers: { 'Access-Control-Allow-Origin': '*' },
+    port: 9090
   },
   css: {
     extract: process.env.NODE_ENV === 'development'
@@ -45,16 +46,16 @@ module.exports = {
     optimization: {
       splitChunks: TARGET_NODE ? false : undefined
     },
-    plugins: [TARGET_NODE ? new VueSSRServerPlugin() : new VueSSRClientPlugin(), new webpack.ProgressPlugin((percentage) => {
+    plugins: [TARGET_NODE ? new VueSSRServerPlugin() : new VueSSRClientPlugin(),new webpack.ProgressPlugin((percentage) => {
     })]
   }),
   chainWebpack: config => {
-    config.resolve.alias.set('getData', resolve('src/getData')).set('src', resolve('src')).set('assets', resolve('src/assets')).set('utils', resolve('src/utils'))
+    config.resolve.alias.set('getData',resolve('src/getData')).set('src',resolve('src')).set('assets',resolve('src/assets')).set('utils',resolve('src/utils'))
     config.module
       .rule('vue')
       .use('vue-loader')
       .tap(options => {
-        return merge(options, {
+        return merge(options,{
           optimizeSSR: false
         })
       })
